@@ -485,6 +485,26 @@ section {
   transform: rotate(180deg);
 }
 
+/* Projects panels: GitHub/Private-Repo link stays on the left where it
+   already was, Collapse moves to the bottom right of the same row. */
+.project-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-2);
+}
+
+.project-card__footer .panel-collapse {
+  margin-top: 0;
+}
+
+/* Experience panels have no left-side footer content, just Collapse —
+   push it to the bottom right on its own (see .timeline__panel's own
+   display:flex further down). */
+.timeline__panel .panel-collapse {
+  align-self: flex-end;
+}
+
 .js .about__more {
   position: relative;
 }
@@ -633,6 +653,8 @@ section {
 }
 
 .timeline__panel {
+  display: flex;
+  flex-direction: column;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease;
