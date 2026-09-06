@@ -810,27 +810,6 @@ section {
   padding: var(--space-3);
 }
 
-/* Collapsed Work-card header thumbnail only (fills the fixed 9rem x
-   6.5rem .project-card__gallery box). Deliberately a DIFFERENT class from
-   .phone-frame--thumb below (the screenshot-strip thumbnail) — the two
-   need different sizing and previously shared one class name, which
-   caused a cascade collision (last-in-file silently won properties
-   neither context intended). Keep them separate. */
-.phone-frame--card {
-  height: 100%;
-  align-items: center;
-  padding: 0.4rem 0.35rem;
-}
-
-.phone-frame--card img {
-  height: 100%;
-  width: auto;
-  aspect-ratio: auto;
-  object-fit: cover;
-  max-width: none;
-  margin-inline: 0;
-}
-
 /* Extra gallery-grouping links that only exist so GLightbox can build a
    multi-image gallery from one visible trigger — not meant to be seen. */
 .project-card__gallery a.sr-only {
@@ -879,8 +858,9 @@ section {
 }
 
 /* Screenshot-strip thumbnail only (.project-modal__media, inside an
-   expanded Work-card panel). See .phone-frame--card above for the
-   collapsed-header thumbnail — kept as a separate class on purpose. */
+   expanded Projects-card panel). The collapsed-header thumbnail is a plain
+   .project-card__image now (no phone-frame), so there's no longer a
+   sibling class to confuse this with. */
 .phone-frame--thumb {
   aspect-ratio: 5 / 3;
   align-items: flex-start;

@@ -131,7 +131,19 @@ resolves with `curl` before assuming it exists) inlined as single-path SVGs
 with `fill="currentColor"`, sized ~20px, no background badge. This replaced
 an earlier 2-letter monogram-badge version — don't revert to monograms if a
 real icon exists. No icon exists for Firestore (reuses the Firebase icon) or
-Football-Data.org API (a hand-drawn generic globe icon instead).
+Football-Data.org API (a hand-drawn generic globe icon instead). The LoL
+Utility App card's icon follows this same Simple Icons convention too
+(slug `riotgames`), just sized larger (~52px) since it's the card's whole
+`.project-card__icon`, not a small inline tech-stack chip.
+
+**Projects card thumbnails** (`assets/img/thumbs/*.png`): tight crops
+straight out of each project's own real screenshots — MAVISE's wordmark
+(from `mavise/login.png`), Footy-Time's ball icon (from
+`footy-time/splash.png`), and Bloem's heart-checkmark logo (from
+`scale-social/capture_1_landing.png`) — cropped with PIL to roughly match
+the `.project-card__gallery` box's ~1.38:1 aspect ratio so `object-fit:
+cover` doesn't cut into them. If a project's screenshots change, these
+crops may need regenerating from the new source image.
 
 **Experience company logos** (`assets/img/logos/*.png`): a different, separate
 convention from tech-stack icons above — these are small self-hosted raster
