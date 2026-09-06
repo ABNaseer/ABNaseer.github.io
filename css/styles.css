@@ -410,7 +410,7 @@ section {
 }
 
 /* "Read the boring part": an inline clamp+expand with its own bespoke
-   word-cutoff/ellipsis effect — unlike Experience/Work's plain
+   word-cutoff/ellipsis effect — unlike Experience/Projects' plain
    data-disclosure-toggle panels, this one is progressive enhancement:
    with no JS (no .js on <html>) the second paragraph just shows in full and
    both toggle buttons stay hidden (they'd do nothing without JS). */
@@ -432,6 +432,21 @@ section {
 .about__toggle:hover,
 .about__toggle:focus-visible {
   color: var(--color-accent);
+}
+
+/* Invisible hitbox extension — the visible text/pill stays the same size,
+   but the clickable/tappable area extends a bit past it in every
+   direction, since these are small text-only buttons. */
+.about__toggle,
+.timeline__toggle {
+  position: relative;
+}
+
+.about__toggle::before,
+.timeline__toggle::before {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
 }
 
 .js .about__more {
@@ -590,7 +605,7 @@ section {
 }
 
 /* Shared chevron used by both the Experience "Show more" toggle and each
-   Work card's toggle; rotates on the parent .is-expanded state. */
+   Projects card's toggle; rotates on the parent .is-expanded state. */
 .project-card__chevron {
   transition: transform 0.3s ease;
   flex-shrink: 0;
@@ -602,7 +617,7 @@ section {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Work                                                                    */
+/* Projects                                                                */
 /* ---------------------------------------------------------------------- */
 
 /* Single column, full container width: cards used to be squeezed into
@@ -686,8 +701,8 @@ section {
   margin-bottom: var(--space-1);
 }
 
-/* Tech-stack chips inside a Work panel: real brand icon + label, in place
-   of a plain dot-separated tech-stack sentence. */
+/* Tech-stack chips inside a Projects panel: real brand icon + label, in
+   place of a plain dot-separated tech-stack sentence. */
 .tech-stack {
   margin-bottom: var(--space-2);
 }
@@ -793,7 +808,7 @@ section {
   background: rgba(58, 44, 34, 0.3);
 }
 
-/* The expandable panel below each Work card's header: screenshot strip
+/* The expandable panel below each Projects card's header: screenshot strip
    (reuses .project-modal__media from the old popup design) + tech stack +
    description, revealed on click. */
 .project-card__panel {
@@ -1091,10 +1106,10 @@ section {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Work-card screenshot strip: a horizontally-scrollable row of real,      */
+/* Projects-card screenshot strip: a horizontally-scrollable row of real,  */
 /* visible .glightbox thumbnails inside an expanded .project-card__panel.  */
 /* This used to live inside a popup (.project-modal__panel/__scroll, both  */
-/* removed when Experience/Work switched from popups to inline expand/     */
+/* removed when Experience/Projects switched from popups to inline expand/ */
 /* collapse) — only the strip itself (.project-modal__media/__thumb) was   */
 /* kept, reused as-is in the new panel layout.                             */
 /* ---------------------------------------------------------------------- */
