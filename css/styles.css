@@ -254,6 +254,7 @@ ul {
 @media (max-width: 640px) {
   .nav__toggle {
     display: block;
+    margin-left: auto;
   }
 
   .nav__menu {
