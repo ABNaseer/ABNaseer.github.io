@@ -133,6 +133,15 @@ an earlier 2-letter monogram-badge version — don't revert to monograms if a
 real icon exists. No icon exists for Firestore (reuses the Firebase icon) or
 Football-Data.org API (a hand-drawn generic globe icon instead).
 
+**Experience company logos** (`assets/img/logos/*.png`): a different, separate
+convention from tech-stack icons above — these are small self-hosted raster
+crops of each company's *real* logo (not Simple Icons, not hand-drawn),
+sized ~32px with rounded corners via `.timeline__logo`. `web7labs.png` is a
+cropped square from their actual LinkedIn logo; `scale-social.png` is their
+site's actual favicon. Don't try to find/replace these with Simple Icons
+SVGs — neither company is in that library, which is why raster crops were
+used instead.
+
 ## Content tone / voice
 
 Calm, literary, first-person, understated — like a well-kept personal journal
