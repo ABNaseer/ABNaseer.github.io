@@ -80,33 +80,62 @@
     });
   });
 
-  // Generic inline expand/collapse for Experience "Show more" and each
-  // Projects card's header: any [data-disclosure-toggle] toggles .is-expanded
-  // on both itself (for the chevron rotation and aria-expanded) and the
-  // panel named in its aria-controls. Also swaps a .timeline__toggle-label
-  // between "Show more" / "Show less" when present.
+  // Generic inline expand/collapse for Experience "Show more", each
+  // Projects card's header, and each panel's trailing "Collapse" link:
+  // any [data-disclosure-toggle] toggles .is-expanded on the panel named
+  // in its aria-controls. A panel can have more than one trigger pointing
+  // at it (header + trailing Collapse), so "expanded" is derived from the
+  // panel's own current state, not any one button's — otherwise two
+  // triggers on the same panel could disagree about which way to toggle.
+  // Also swaps a .timeline__toggle-label between "Show more" / "Show less"
+  // on whichever trigger has one (the trailing Collapse links don't).
   document.querySelectorAll("[data-disclosure-toggle]").forEach(function (btn) {
-    var panel = document.getElementById(btn.getAttribute("aria-controls"));
-    var label = btn.querySelector(".timeline__toggle-label");
+    var panelId = btn.getAttribute("aria-controls");
+    var panel = document.getElementById(panelId);
     btn.addEventListener("click", function () {
-      var expanded = btn.getAttribute("aria-expanded") !== "true";
+      var expanded = panel
+        ? !panel.classList.contains("is-expanded")
+        : btn.getAttribute("aria-expanded") !== "true";
+      // Anchor scroll correction to the FIRST trigger for this panel (the
+      // header, always inserted before any trailing Collapse link in the
+      // markup) rather than whichever button was actually clicked — a
+      // trailing Collapse link lives inside the panel itself, so once it
+      // collapses to max-height:0 that button's own position is no longer
+      // meaningful to restore. The header stays visible in both states.
+      var anchorBtn =
+        document.querySelector('[data-disclosure-toggle][aria-controls="' + panelId + '"]') || btn;
+      // Clicking a trailing "Collapse" link (btn !== anchorBtn) means the
+      // user scrolled down past the header to finish reading — after
+      // collapsing they should land back on the header, not wherever the
+      // header happened to be off-screen at click time. Clicking the
+      // header itself (expand or collapse) should instead just hold its
+      // position steady, since the user is already looking right at it.
+      var isTrailingCollapse = btn !== anchorBtn;
       // The max-height transition below shifts everything after this
       // button, and the browser's own scroll anchoring doesn't reliably
       // compensate for it (confirmed jumping to unrelated content,
       // especially noticeable on mobile where the shift is a bigger
-      // fraction of the viewport) — so pin this button's own viewport
-      // position manually once the transition settles, on both expand
-      // and collapse.
-      var beforeTop = btn.getBoundingClientRect().top;
-      btn.setAttribute("aria-expanded", String(expanded));
-      btn.classList.toggle("is-expanded", expanded);
+      // fraction of the viewport) — so pin the anchor's viewport position
+      // manually once the transition settles, on both expand and collapse.
+      var beforeTop = anchorBtn.getBoundingClientRect().top;
       if (panel) panel.classList.toggle("is-expanded", expanded);
-      if (label) label.textContent = expanded ? "Show less" : "Show more";
+      document
+        .querySelectorAll('[data-disclosure-toggle][aria-controls="' + panelId + '"]')
+        .forEach(function (trigger) {
+          trigger.setAttribute("aria-expanded", String(expanded));
+          trigger.classList.toggle("is-expanded", expanded);
+          var label = trigger.querySelector(".timeline__toggle-label");
+          if (label) label.textContent = expanded ? "Show less" : "Show more";
+        });
       if (panel) {
         panel.addEventListener(
           "transitionend",
           function () {
-            var afterTop = btn.getBoundingClientRect().top;
+            if (isTrailingCollapse) {
+              anchorBtn.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              return;
+            }
+            var afterTop = anchorBtn.getBoundingClientRect().top;
             var delta = afterTop - beforeTop;
             if (delta !== 0) window.scrollBy(0, delta);
           },
