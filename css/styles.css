@@ -690,6 +690,9 @@ section {
 .project-card h3 {
   font-size: 1.1rem;
   margin-bottom: 0;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .project-card__meta {
@@ -907,9 +910,19 @@ section {
   border-radius: 1.5rem;
 }
 
+/* GLightbox measures this slide's "natural" height in JS and sets its own
+   inline height on BOTH this element and its .gslide-media.gslide-inline
+   parent (often smaller than what the phone-frame actually needs once its
+   image has loaded), silently forcing the scroll below despite the
+   max-height math matching the plain image slides. Override both. */
+.gslide-media.gslide-inline {
+  height: auto !important;
+}
+
 .glightbox-inline-content {
   background: transparent;
   padding: var(--space-3);
+  height: auto !important;
   max-height: 85vh;
   overflow-y: auto;
   display: flex;
@@ -1159,6 +1172,19 @@ section {
   .project-modal__thumb img,
   .project-modal__thumb--phone .phone-frame {
     height: 7rem;
+  }
+
+  /* Collapsed card header: at very narrow widths (320px) the fixed 9rem
+     thumbnail + gaps left too little room for the title column, clipping
+     long words like "Multimodal" under the ancestor's overflow:hidden. */
+  .project-card__gallery {
+    width: 5.5rem;
+    height: 4.5rem;
+  }
+
+  .project-card__toggle,
+  .project-card__header {
+    gap: var(--space-2);
   }
 }
 
