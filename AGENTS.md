@@ -24,7 +24,7 @@ css/styles.css     All styles — design tokens live at the top as :root vars
 js/script.js       Nav toggle, scroll-reveal, footer year, in-page anchor
                    scrolling (no #hash written to the URL), the
                    data-disclosure-toggle inline expand/collapse (Experience,
-                   Work), and the one real popup (Get in Touch). See "Inline
+                   Projects), and the one real popup (Get in Touch). See "Inline
                    disclosures vs. the one real popup" below — both are
                    deliberate exceptions to "fully usable with JS disabled",
                    but not in quite the same way (disclosures keep content
@@ -79,14 +79,14 @@ carousels, or anything flashy — restraint is the point.
 
 ## Inline disclosures vs. the one real popup
 
-**As of the "no popups for Experience/Work" pass, there is exactly ONE true
-popup left on this page: Get in Touch** (`#contactModal`, opened via
+**As of the "no popups for Experience/Projects" pass, there is exactly ONE
+true popup left on this page: Get in Touch** (`#contactModal`, opened via
 `data-open-modal`). Abdullah explicitly disliked the popup pattern for
-Experience/Work ("I kinda dont dig this simplistic popups... those cards
+Experience/Projects ("I kinda dont dig this simplistic popups... those cards
 aint it") and asked for inline expand/collapse instead. Don't reintroduce
 modals for those two sections without being asked again.
 
-**Inline expand/collapse** (Experience "Show more", each Work card, and
+**Inline expand/collapse** (Experience "Show more", each Projects card, and
 About's "Read the boring part") all follow the same idea: a trigger button
 with `aria-expanded`/`aria-controls`, and a sibling panel that's
 `max-height: 0; overflow: hidden;` by default, expanding to a generous fixed
@@ -98,7 +98,7 @@ toggle. Three concrete flavors on the page:
 - **Experience** (`.timeline__toggle` / `.timeline__panel`): plain
   "Show more" / "Show less" button + panel, wired by the generic
   `[data-disclosure-toggle]` handler below.
-- **Work** (`.project-card__toggle` / `.project-card__panel`): the whole
+- **Projects** (`.project-card__toggle` / `.project-card__panel`): the whole
   card header (thumbnail + title + chevron) is the toggle button; its panel
   holds the screenshot strip (`.project-modal__media`, reused from the old
   popup design — still real, visible `.glightbox` anchors, no more hidden
@@ -108,11 +108,11 @@ toggle. Three concrete flavors on the page:
 **Generic wiring**: any element with `data-disclosure-toggle` and
 `aria-controls="somePanelId"` gets wired automatically by one handler in
 script.js — toggles `.is-expanded` on itself (chevron rotation via
-`.project-card__chevron`, shared by both Experience and Work) and on the
+`.project-card__chevron`, shared by both Experience and Projects) and on the
 panel. No per-item JS needed. This does NOT use `data-open-modal` — that
 attribute is reserved for actual modals (currently just Get in Touch).
 
-- **Trade-off, know this before "fixing" it**: expanding Experience/Work
+- **Trade-off, know this before "fixing" it**: expanding Experience/Projects
   content requires JS. With JS disabled, the toggle buttons still render,
   but clicking does nothing and the panel stays visually collapsed
   (`max-height: 0`, though — unlike the old `[hidden]`-based popups — the

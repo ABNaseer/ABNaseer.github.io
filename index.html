@@ -38,8 +38,8 @@
       <div class="nav__right">
         <ul class="nav__menu" id="navMenu">
           <li><a href="#about">About</a></li>
-          <li><a href="#work">Work</a></li>
           <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -52,7 +52,7 @@
         <h1 class="hero__title">Abdullah Naseer</h1>
         <p class="hero__tagline">Software Engineer, Full-Stack &amp; Applied ML</p>
         <div class="hero__actions">
-          <a class="button button--ghost" href="#work">See my work</a>
+          <a class="button button--ghost" href="#projects">See my work</a>
           <button class="button button--ghost" type="button" data-open-modal="contactModal" aria-haspopup="dialog">Get in Touch</button>
           <a class="button button--ghost" href="assets/ABNaseer_Resume.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
         </div>
@@ -65,8 +65,8 @@
       <div class="container container--narrow">
         <h2 class="section-title">About</h2>
         <p>
-          Software engineer by day, vibecoder by night. I live in Lahore,
-          and my time splits between the two.
+          Software engineer by day, vibecoder by night. My time splits
+          between the two.
         </p>
         <div class="about__more" id="aboutMore">
           <div class="about__more-text">
@@ -81,10 +81,10 @@
               closing it out with 1st position in my FYP.
             </p>
             <p>
-              Football takes up a good share of my free time. I've followed
-              Bayern Munich since 2014, through the trophies and the
-              robberies. Javi Martinez was my favorite back then. Pavlovic
-              and Olise have that spot now.
+              Football takes up a good share of my free time. I play as much
+              as my body allows, and I've followed Bayern Munich since 2014,
+              through the trophies and the robberies. Javi Martinez was my
+              favorite back then. Olise has that spot now.
             </p>
             <p>
               A playlist for every mood runs behind all of this. You can see
@@ -115,10 +115,60 @@
 
     <div class="divider" role="presentation"></div>
 
-    <section id="work" class="projects reveal">
+    <section id="experience" class="experience reveal">
+      <div class="container container--narrow">
+        <h2 class="section-title">Experience</h2>
+        <ul class="timeline">
+          <li class="timeline__item">
+            <div class="timeline__header">
+              <img class="timeline__logo" src="assets/img/logos/web7labs.png" alt="" loading="lazy" />
+              <div class="timeline__header-text">
+                <h3>Associate Software Engineer</h3>
+                <p class="timeline__meta">Web7Labs · Lahore, on-site · July 2026 – present</p>
+              </div>
+            </div>
+            <button class="timeline__toggle" type="button" data-disclosure-toggle aria-expanded="false" aria-controls="exp-web7labs-panel">
+              <span class="timeline__toggle-label">Show more</span>
+              <svg class="project-card__chevron" viewBox="0 0 12 8" width="14" height="10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="timeline__panel" id="exp-web7labs-panel">
+              <p>
+                I work on Web7Labs' production Wealthtech platform using Next.js,
+                Express, PostgreSQL, and Prisma. I also train and mentor the engineering
+                interns on generative AI and LLM-powered chatbots.
+              </p>
+            </div>
+          </li>
+          <li class="timeline__item">
+            <div class="timeline__header">
+              <img class="timeline__logo" src="assets/img/logos/scale-social.png" alt="" loading="lazy" />
+              <div class="timeline__header-text">
+                <h3>AI Automation Engineer</h3>
+                <p class="timeline__meta">Scale Social AI · Remote · May 2026 – July 2026</p>
+              </div>
+            </div>
+            <button class="timeline__toggle" type="button" data-disclosure-toggle aria-expanded="false" aria-controls="exp-scalesocial-panel">
+              <span class="timeline__toggle-label">Show more</span>
+              <svg class="project-card__chevron" viewBox="0 0 12 8" width="14" height="10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="timeline__panel" id="exp-scalesocial-panel">
+              <p>
+                I automated a YC-funded startup's social media workflows end to end using
+                n8n, cutting out most of the manual content review. A WhatsApp-based
+                approval system turned what used to take hours into a few minutes.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="divider" role="presentation"></div>
+
+    <section id="projects" class="projects reveal">
       <div class="container">
-        <h2 class="section-title">Work</h2>
-        <p class="section-subtitle">Research, freelance, and personal work. The Experience section below covers day-to-day employment.</p>
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Research, freelance, and personal work. The Experience section above covers day-to-day employment.</p>
         <ul class="projects__grid">
 
           <li class="project-card">
@@ -348,56 +398,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <div class="divider" role="presentation"></div>
-
-    <section id="experience" class="experience reveal">
-      <div class="container container--narrow">
-        <h2 class="section-title">Experience</h2>
-        <ul class="timeline">
-          <li class="timeline__item">
-            <div class="timeline__header">
-              <img class="timeline__logo" src="assets/img/logos/web7labs.png" alt="" loading="lazy" />
-              <div class="timeline__header-text">
-                <h3>Associate Software Engineer</h3>
-                <p class="timeline__meta">Web7Labs · Lahore, on-site · July 2026 – present</p>
-              </div>
-            </div>
-            <button class="timeline__toggle" type="button" data-disclosure-toggle aria-expanded="false" aria-controls="exp-web7labs-panel">
-              <span class="timeline__toggle-label">Show more</span>
-              <svg class="project-card__chevron" viewBox="0 0 12 8" width="14" height="10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <div class="timeline__panel" id="exp-web7labs-panel">
-              <p>
-                I work on Web7Labs' production Wealthtech platform using Next.js,
-                Express, PostgreSQL, and Prisma. I also train and mentor the engineering
-                interns on generative AI and LLM-powered chatbots.
-              </p>
-            </div>
-          </li>
-          <li class="timeline__item">
-            <div class="timeline__header">
-              <img class="timeline__logo" src="assets/img/logos/scale-social.png" alt="" loading="lazy" />
-              <div class="timeline__header-text">
-                <h3>AI Automation Engineer</h3>
-                <p class="timeline__meta">Scale Social AI · Remote · May 2026 – July 2026</p>
-              </div>
-            </div>
-            <button class="timeline__toggle" type="button" data-disclosure-toggle aria-expanded="false" aria-controls="exp-scalesocial-panel">
-              <span class="timeline__toggle-label">Show more</span>
-              <svg class="project-card__chevron" viewBox="0 0 12 8" width="14" height="10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <div class="timeline__panel" id="exp-scalesocial-panel">
-              <p>
-                I automated a YC-funded startup's social media workflows end to end using
-                n8n, cutting out most of the manual content review. A WhatsApp-based
-                approval system turned what used to take hours into a few minutes.
-              </p>
-            </div>
-          </li>
-        </ul>
       </div>
     </section>
 

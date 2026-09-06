@@ -1,7 +1,7 @@
 /**
  * Mostly progressive enhancement, with one deliberate exception. Nav links,
  * scrolling, and the About section's second paragraph all still work/show
- * with JS disabled. Experience's "Show more" and each Work card
+ * with JS disabled. Experience's "Show more" and each Projects card
  * (data-disclosure-toggle, see below) plus the Get in Touch popup do NOT:
  * with JS off, the triggers still render but do nothing, and their content
  * stays visually collapsed (max-height: 0 for disclosures, [hidden] for
@@ -81,7 +81,7 @@
   });
 
   // Generic inline expand/collapse for Experience "Show more" and each
-  // Work card's header: any [data-disclosure-toggle] toggles .is-expanded
+  // Projects card's header: any [data-disclosure-toggle] toggles .is-expanded
   // on both itself (for the chevron rotation and aria-expanded) and the
   // panel named in its aria-controls. Also swaps a .timeline__toggle-label
   // between "Show more" / "Show less" when present.
