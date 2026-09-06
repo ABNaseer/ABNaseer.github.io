@@ -534,6 +534,9 @@ section {
 
 .timeline__item {
   position: relative;
+  /* See .project-card's identical comment — same scroll-anchoring fight,
+     same fix. */
+  overflow-anchor: none;
 }
 
 .timeline__item::before {
@@ -633,6 +636,11 @@ section {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   overflow: hidden;
+  /* The browser's own scroll anchoring picks unpredictable anchor nodes
+     inside a card that's resizing (fighting the deliberate scroll
+     correction in script.js's disclosure-toggle handler) — opt out so
+     that correction is the only thing adjusting scroll here. */
+  overflow-anchor: none;
 }
 
 /* Collapsed header: thumbnail + title side by side, chevron at the end.

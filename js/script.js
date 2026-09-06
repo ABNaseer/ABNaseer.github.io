@@ -90,10 +90,29 @@
     var label = btn.querySelector(".timeline__toggle-label");
     btn.addEventListener("click", function () {
       var expanded = btn.getAttribute("aria-expanded") !== "true";
+      // The max-height transition below shifts everything after this
+      // button, and the browser's own scroll anchoring doesn't reliably
+      // compensate for it (confirmed jumping to unrelated content,
+      // especially noticeable on mobile where the shift is a bigger
+      // fraction of the viewport) — so pin this button's own viewport
+      // position manually once the transition settles, on both expand
+      // and collapse.
+      var beforeTop = btn.getBoundingClientRect().top;
       btn.setAttribute("aria-expanded", String(expanded));
       btn.classList.toggle("is-expanded", expanded);
       if (panel) panel.classList.toggle("is-expanded", expanded);
       if (label) label.textContent = expanded ? "Show less" : "Show more";
+      if (panel) {
+        panel.addEventListener(
+          "transitionend",
+          function () {
+            var afterTop = btn.getBoundingClientRect().top;
+            var delta = afterTop - beforeTop;
+            if (delta !== 0) window.scrollBy(0, delta);
+          },
+          { once: true }
+        );
+      }
     });
   });
 
