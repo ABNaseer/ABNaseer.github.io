@@ -67,6 +67,23 @@ expect them at the domain root) — these two are the intentional exception to
   those ever change; they're duplicated by design for different consumers
   (Google, social link previews, browsers), not accidentally out of sync.
 
+## Image format and dimensions
+
+All project screenshots, thumbnails, and company logos are `.webp` (not
+`.png`) — converted from PNG sources for ~90% smaller file size with no
+visible quality loss (Pillow, quality 85). `og-image.png` and everything in
+`assets/img/favicon/` are the deliberate exceptions and stay PNG/ICO for
+social-crawler and OS icon compatibility.
+
+Every real `<img>` tag also carries explicit `width`/`height` attributes
+matching the file's actual pixel dimensions. These do NOT affect the
+rendered size — every image is styled with `width: 100%`/`object-fit` (or
+similar) in CSS, which always wins for display size — they exist purely so
+the browser can reserve the correct aspect ratio before the image loads,
+preventing layout shift. If you add a new image, convert it to `.webp` and
+set real `width`/`height` attrs the same way; don't add a `<picture>`
+fallback or keep the PNG around, `.webp` alone is fine at this site's scale.
+
 ## Design system (CSS custom properties)
 
 Everything themeable lives in `:root` at the top of `css/styles.css`. Do not
@@ -162,20 +179,20 @@ Utility App card's icon follows this same Simple Icons convention too
 (slug `riotgames`), just sized larger (~52px) since it's the card's whole
 `.project-card__icon`, not a small inline tech-stack chip.
 
-**Projects card thumbnails** (`assets/img/thumbs/*.png`): tight crops
+**Projects card thumbnails** (`assets/img/thumbs/*.webp`): tight crops
 straight out of each project's own real screenshots — MAVISE's wordmark
-(from `mavise/login.png`), Footy-Time's ball icon (from
-`footy-time/splash.png`), and Bloem's heart-checkmark logo (from
-`scale-social/capture_1_landing.png`) — cropped with PIL to roughly match
+(from `mavise/login.webp`), Footy-Time's ball icon (from
+`footy-time/splash.webp`), and Bloem's heart-checkmark logo (from
+`scale-social/capture_1_landing.webp`) — cropped with PIL to roughly match
 the `.project-card__gallery` box's ~1.38:1 aspect ratio so `object-fit:
 cover` doesn't cut into them. If a project's screenshots change, these
 crops may need regenerating from the new source image.
 
-**Experience company logos** (`assets/img/logos/*.png`): a different, separate
+**Experience company logos** (`assets/img/logos/*.webp`): a different, separate
 convention from tech-stack icons above — these are small self-hosted raster
 crops of each company's *real* logo (not Simple Icons, not hand-drawn),
-sized ~32px with rounded corners via `.timeline__logo`. `web7labs.png` is a
-cropped square from their actual LinkedIn logo; `scale-social.png` is their
+sized ~32px with rounded corners via `.timeline__logo`. `web7labs.webp` is a
+cropped square from their actual LinkedIn logo; `scale-social.webp` is their
 site's actual favicon. Don't try to find/replace these with Simple Icons
 SVGs — neither company is in that library, which is why raster crops were
 used instead.
