@@ -4,6 +4,36 @@
    All theming lives in the custom properties below — tweak here, not inline.
    ========================================================================== */
 
+/* Self-hosted fonts (latin subset only, pulled from Google Fonts once and
+   committed here) instead of the fonts.googleapis.com/fonts.gstatic.com
+   CDN — self-hosting collapses the CSS-fetch + font-fetch double round
+   trip into a single same-origin request, which noticeably shortens the
+   fallback-to-webfont flash (FOUT) on a cold/hard-refresh load. Each
+   family below is a single variable-font file covering its full weight
+   range; only Lora italic is a static single-weight file since the site
+   only ever uses italic at 400. */
+@font-face {
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../assets/fonts/lora-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lora";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/lora-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("../assets/fonts/source-sans-3-normal.woff2") format("woff2");
+}
+
 :root {
   /* -- Color tokens (sepia/parchment palette) -- */
   --color-bg: #f4ecd8;

@@ -109,6 +109,26 @@ comfortably clears 4.5:1; don't introduce low-contrast pastel accents).
 buttons, meta text, captions). Keep that split — don't set body copy in the
 sans font or UI labels in the serif font.
 
+Both are **self-hosted** (`assets/fonts/*.woff2`, `@font-face` rules at the
+top of `css/styles.css`), not pulled from the Google Fonts CDN. This was a
+deliberate change (2026-09-12): the old `fonts.googleapis.com` +
+`fonts.gstatic.com` setup meant a hard refresh had to do a CSS fetch *then*
+a font fetch across two extra origins before Lora/Source Sans 3 could
+paint, so the fallback (Georgia/system sans) was visibly shown then swapped
+— a noticeable "flash of unstyled text." Self-hosting collapses that to one
+same-origin request per file. Three files total: `lora-normal.woff2` (a
+variable font, wght 400–700, covers every normal-style weight the site
+uses), `lora-italic.woff2` (static, 400 only — italic is never used at
+other weights), `source-sans-3-normal.woff2` (variable, wght 200–900). Only
+the `latin` Unicode-range subset was kept (site is English-only) — if you
+ever add non-Latin content, re-fetch the fuller subset from Google Fonts.
+`index.html`'s `<head>` also `rel="preload"`s the two most-used files
+(`lora-normal`, `source-sans-3-normal`) so they start downloading before
+`css/styles.css` is even parsed. Don't reintroduce the Google Fonts
+`<link>` tags — if you need a new weight/style, re-run the same
+fetch-CSS-then-download-the-woff2 process against Google Fonts' `css2` API
+and add a new `@font-face` block here instead.
+
 **Spacing scale**: `--space-1` through `--space-6` (0.5rem → 6rem). Use these
 instead of arbitrary margin/padding values so rhythm stays consistent.
 
