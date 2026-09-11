@@ -41,6 +41,32 @@ TASKS.md           Untracked. To-do tracker for Abdullah.
 If you add images/screenshots later, put them in an `assets/` or `images/`
 folder alongside `css/` and `js/` — keep the root uncluttered.
 
+`robots.txt` and `sitemap.xml` live at the repo root (GitHub Pages serves
+them from wherever they sit relative to `index.html`, and search engines
+expect them at the domain root) — these two are the intentional exception to
+"keep the root uncluttered."
+
+## SEO / social preview assets
+
+- `assets/img/favicon/` — favicon.ico (16/32/48 multi-size) + individual
+  favicon-{16,32,192,512}.png + apple-touch-icon.png, all a plain "AN"
+  monogram in `--color-ink` on `--color-bg`/`--color-bg-alt`, generated with
+  Liberation Serif Bold via Pillow (script not kept in-repo — regenerate the
+  same way if these ever need to change, Lora itself isn't installed
+  locally so Liberation Serif is the deliberate stand-in for icon-sized
+  text).
+- `assets/img/og-image.png` (1200x630) — the Open Graph / Twitter card
+  preview image, same sepia palette and monogram, name + tagline +
+  `abnaseer.github.io`. Referenced by absolute URL in `index.html`'s
+  `<head>` (`og:image`/`twitter:image` require absolute URLs, not relative
+  paths). If the tagline in the hero changes, regenerate this image to
+  match.
+- `<head>` also carries canonical link, `og:*`/`twitter:*` meta, and a
+  JSON-LD `Person` schema block — keep all of these (title, description,
+  URL) in sync with the visible `<title>`/meta description/hero content if
+  those ever change; they're duplicated by design for different consumers
+  (Google, social link previews, browsers), not accidentally out of sync.
+
 ## Design system (CSS custom properties)
 
 Everything themeable lives in `:root` at the top of `css/styles.css`. Do not
