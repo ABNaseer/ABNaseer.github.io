@@ -45,6 +45,11 @@
   --color-accent-dark: #6e4620;
   --color-rule: #cbb994;        /* hairline / divider color */
   --color-border: #ddcda6;
+  --color-riot-red: #eb0029;    /* Riot Games' official brand red (LoL card icon, expanded) */
+
+  /* Collapsed project thumbnails are toned to the parchment palette;
+     expanding a card restores full colour. */
+  --thumb-filter: grayscale(1) sepia(0.5) contrast(0.8) brightness(1.25);
 
   /* -- Typography -- */
   --font-serif: "Lora", Georgia, "Times New Roman", serif;
@@ -584,6 +589,13 @@ section {
   margin-top: 0;
 }
 
+/* Two footer links side by side (e.g. Live site + Private Repo). */
+.project-card__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 /* Experience panels have no left-side footer content, just Collapse —
    push it to the bottom right on its own (see .timeline__panel's own
    display:flex further down). */
@@ -796,11 +808,8 @@ section {
 }
 
 /* Collapsed header: thumbnail + title side by side, chevron at the end.
-   .project-card__toggle is the click target for the 3 real projects;
-   the LoL Utility App card (no expand/collapse) reuses the same layout
-   classes directly on plain <div>s instead of a button — see its markup. */
-.project-card__toggle,
-.project-card__header {
+   .project-card__toggle is the click target on every card. */
+.project-card__toggle {
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -838,8 +847,15 @@ section {
   height: 100%;
   object-fit: cover;
   background: var(--color-bg-alt);
-  transition: transform 0.35s ease;
+  filter: var(--thumb-filter);
+  mix-blend-mode: multiply;  /* whites take on the parchment behind them */
+  transition: transform 0.35s ease, filter 0.35s ease;
   display: block;
+}
+
+.project-card__toggle.is-expanded .project-card__image {
+  filter: none;
+  mix-blend-mode: normal;
 }
 
 .project-card__body {
@@ -853,15 +869,6 @@ section {
   overflow-wrap: break-word;
   -webkit-hyphens: auto;
   hyphens: auto;
-}
-
-.project-card__meta {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-ink-soft);
-  margin-bottom: var(--space-1);
 }
 
 /* Tech-stack chips inside a Projects panel: real brand icon + label, in
@@ -940,6 +947,13 @@ section {
 
 .project-card__icon {
   color: var(--color-ink-soft);
+  transition: color 0.35s ease;
+}
+
+/* The LoL card's icon is an inline SVG, already sepia-toned by colour;
+   expanded, it switches to Riot's own red. */
+.project-card__toggle.is-expanded .project-card__icon--riot {
+  color: var(--color-riot-red);
 }
 
 /* Hover/focus affordance on the toggle button (whole clickable header). */
@@ -1037,21 +1051,20 @@ section {
 }
 
 /* Screenshot-strip thumbnail only (.project-modal__media, inside an
-   expanded Projects-card panel). The collapsed-header thumbnail is a plain
-   .project-card__image now (no phone-frame), so there's no longer a
-   sibling class to confuse this with. */
-.phone-frame--thumb {
-  aspect-ratio: 5 / 3;
-  align-items: flex-start;
-  overflow: hidden;
-}
-
+   expanded Projects-card panel). The frame hugs the portrait screenshot
+   (height from .project-modal__thumb--phone below) so the strip's own
+   parchment background shows around it, same as the other projects' strips.
+   It used to be forced into a wide 5:3 box, which turned most of each
+   thumbnail into a dark-brown slab. */
 .phone-frame--thumb img {
   aspect-ratio: 9 / 19.5;
   object-fit: cover;
   object-position: top center;
-  max-width: 11rem;
-  margin-inline: auto;
+}
+
+/* At thumbnail size the notch just covers the top of the screenshot. */
+.phone-frame--thumb .phone-frame__notch {
+  display: none;
 }
 
 .phone-frame--lightbox {
@@ -1077,6 +1090,10 @@ section {
    max-height math matching the plain image slides. Override both. */
 .gslide-media.gslide-inline {
   height: auto !important;
+  /* GLightbox paints inline slides on a white card; image slides float on
+     the dark overlay. Match them so the phone frame sits on the overlay. */
+  background: transparent;
+  box-shadow: none;
 }
 
 .glightbox-inline-content {
