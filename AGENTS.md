@@ -87,7 +87,8 @@ Firestore (reuses Firebase) or Football-Data.org (hand-drawn globe).
 **Card thumbnails** (`assets/img/thumbs/`): crops from each project's own
 assets at the gallery box's ~1.38:1 ratio. Grownance uses its app icon on
 its own `#f8fbfa` background. Collapsed, CSS tones every thumbnail sepia
-(`--thumb-filter` + `mix-blend-mode: multiply`); expanded shows full colour.
+(`--thumb-filter` + `mix-blend-mode: multiply`); expanded, hovered (mouse
+only) or keyboard-focused shows full colour.
 Keep the source files in colour. The LoL card's icon is the Simple Icons
 `riotgames` fist (~52px): sepia collapsed, `--color-riot-red` (Riot's
 official `#eb0029`) expanded.

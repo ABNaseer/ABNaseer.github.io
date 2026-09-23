@@ -956,33 +956,35 @@ section {
   color: var(--color-riot-red);
 }
 
+/* On a mouse/trackpad, hovering a card previews its true colours too.
+   Keyboard focus does the same. Touch screens skip the hover part, so a tap
+   doesn't leave a thumbnail stuck in colour. */
+@media (hover: hover) {
+  .project-card__toggle:hover .project-card__image {
+    filter: none;
+    mix-blend-mode: normal;
+  }
+
+  .project-card__toggle:hover .project-card__icon--riot {
+    color: var(--color-riot-red);
+  }
+}
+
+.project-card__toggle:focus-visible .project-card__image {
+  filter: none;
+  mix-blend-mode: normal;
+}
+
+.project-card__toggle:focus-visible .project-card__icon--riot {
+  color: var(--color-riot-red);
+}
+
 /* Hover/focus affordance on the toggle button (whole clickable header). */
 .project-card__toggle:hover .project-card__image,
 .project-card__toggle:focus-visible .project-card__image,
 .project-card__toggle:hover .phone-frame,
 .project-card__toggle:focus-visible .phone-frame {
   transform: scale(1.05);
-}
-
-.project-card__gallery::after {
-  content: "\2921";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  color: var(--color-surface);
-  background: rgba(58, 44, 34, 0);
-  opacity: 0;
-  transition: opacity 0.25s ease, background 0.25s ease;
-  pointer-events: none;
-}
-
-.project-card__toggle:hover .project-card__gallery::after,
-.project-card__toggle:focus-visible .project-card__gallery::after {
-  opacity: 1;
-  background: rgba(58, 44, 34, 0.3);
 }
 
 /* The expandable panel below each Projects card's header: screenshot strip
@@ -1175,8 +1177,8 @@ section {
   }
 
   .project-card__image,
+  .project-card__icon,
   .phone-frame,
-  .project-card__gallery::after,
   .project-card__chevron,
   .project-card__panel,
   .timeline__panel {
