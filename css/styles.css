@@ -61,6 +61,8 @@
   /* -- Layout -- */
   --content-width: 72rem;
   --content-width-narrow: 42rem;
+  --margin-title-width: 13rem;  /* desktop left column for section titles */
+  --measure: 46rem;             /* max line length for prose on desktop */
   --radius: 6px;
 }
 
@@ -222,7 +224,7 @@ ul {
 
 .nav__menu {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-1);
 }
 
 .nav__socials {
@@ -243,16 +245,23 @@ ul {
   color: var(--color-accent-dark);
 }
 
+/* Same filled-on-hover treatment as the hero's .button--ghost, so nav links
+   and buttons share one hover language. */
 .nav__menu a {
+  display: block;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
   color: var(--color-ink-soft);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .nav__menu a:hover,
 .nav__menu a:focus-visible {
-  color: var(--color-accent-dark);
+  background: var(--color-accent-dark);
+  color: var(--color-bg);
 }
 
 .nav__toggle {
@@ -307,6 +316,7 @@ ul {
     display: block;
     padding: var(--space-2) var(--space-3);
     border-top: 1px solid var(--color-border);
+    border-radius: 0;
   }
 
   /* Redundant with the Get in Touch popup's own GitHub/LinkedIn/email
@@ -412,6 +422,52 @@ section {
   color: var(--color-ink-soft);
   font-family: var(--font-sans);
   margin-bottom: var(--space-4);
+}
+
+/* Desktop "margin title" layout: instead of a centered 42rem column with
+   empty space either side, every section uses the full content width —
+   title in a left column (like a chapter heading in a book's margin),
+   content on the right. Lines up with the nav and Projects card edges;
+   prose is still capped at --measure so lines don't get too long.
+   Below 960px everything falls back to the centered single column. */
+@media (min-width: 960px) {
+  .about > .container,
+  .experience > .container,
+  .projects > .container,
+  .contact > .container {
+    max-width: var(--content-width);
+    display: grid;
+    grid-template-columns: var(--margin-title-width) minmax(0, 1fr);
+    column-gap: var(--space-4);
+    align-items: start;
+  }
+
+  .about .section-title,
+  .experience .section-title,
+  .projects .section-title,
+  .contact .section-title {
+    grid-column: 1;
+    grid-row: 1 / span 10;
+    position: sticky;
+    top: 6rem;
+    margin: 0;
+    text-align: left;
+  }
+
+  .about > .container > :not(.section-title),
+  .experience > .container > :not(.section-title),
+  .contact > .container > :not(.section-title) {
+    grid-column: 2;
+    max-width: var(--measure);
+  }
+
+  .projects > .container > :not(.section-title) {
+    grid-column: 2;
+  }
+
+  .projects .section-subtitle {
+    text-align: left;
+  }
 }
 
 .about p {
@@ -680,6 +736,14 @@ section {
 .timeline__toggle:hover,
 .timeline__toggle:focus-visible {
   color: var(--color-accent);
+}
+
+/* script.js swaps the label between "Show more" and the narrower "Show
+   less". Without a fixed width the button (and its ::before hitbox) shrinks
+   after the first click, so a second tap on the same edge misses. 5em fits
+   the wider label. */
+.timeline__toggle-label {
+  min-width: 5em;
 }
 
 .timeline__panel {

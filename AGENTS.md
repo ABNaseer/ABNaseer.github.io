@@ -132,6 +132,17 @@ and add a new `@font-face` block here instead.
 **Spacing scale**: `--space-1` through `--space-6` (0.5rem → 6rem). Use these
 instead of arbitrary margin/padding values so rhythm stays consistent.
 
+**Desktop layout (≥960px)**: About/Experience/Projects/Contact use a
+"margin title" grid — section title in a sticky left column
+(`--margin-title-width`), content on the right, all within
+`--content-width` so every section lines up with the nav and Projects
+cards. Prose is capped at `--measure`. Below 960px it falls back to the
+centered single column (`.container--narrow`). This replaced the old
+centered 42rem column, which left large empty margins on wide screens.
+
+**Hover language**: nav links share the hero buttons' hover — fill with
+`--color-accent-dark`, text in `--color-bg`, `--radius` corners.
+
 **Section dividers**: the `❧` character inside `.divider` stands in for a
 "chapter break" — understated, not a hard `<hr>` line. If you add new
 top-level sections, keep a `.divider` between them.
