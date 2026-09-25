@@ -1,0 +1,29 @@
+# Abdullah Naseer
+
+> Software Engineer building full-stack applications and AI automation systems, from research prototypes to production. Based in Lahore, Pakistan.
+
+This is the personal portfolio of Abdullah Naseer. The whole site is a single page at https://abnaseer.github.io/ with About, Experience, Projects and Get in Touch sections.
+
+## Pages
+
+- [Portfolio](https://abnaseer.github.io/): About, experience, projects and contact details
+- [Resume (PDF)](https://abnaseer.github.io/assets/ABNaseer_Resume.pdf): Full resume
+
+## Experience
+
+- Associate Software Engineer, Web7Labs (Lahore, on-site), July 2026 to present: production Wealthtech platform on Next.js, Express, PostgreSQL and Prisma; trains and mentors engineering interns on generative AI and LLM-powered chatbots.
+- AI Automation Engineer, Scale Social AI (freelance contract), May 2026 to August 2026: automated a YC-funded startup's social media workflows end to end with n8n, including a WhatsApp-based approval system.
+
+## Projects
+
+- [MAVISE](https://github.com/zainzaidi328/mavise_v5): Multimodal audio-visual speech enhancement, award-winning final-year project at COMSATS. CNN + BiLSTM + cross-attention Transformer; STOI 0.35 to 0.80, PESQ 1.1 to 2.6. Python, PyTorch, FastAPI, MediaPipe.
+- [Grownance](https://www.grownance.com): Fractional investment in cars and property from PKR 1,000. Next.js, Express, PostgreSQL, Prisma, Redis (BullMQ), Sentry.
+- [Footy-Time](https://github.com/ABNaseer/Footy-Time): Flutter app for football players with teams, match news, player stats and a gear marketplace. Flutter, Dart, Firebase, Football-Data.org API.
+- Bloem by Scale Social: 70-node n8n workflow for WhatsApp-based content approval and publishing to Instagram and Google Business Profile.
+- LoL App: In progress, a League of Legends web app for stats tracking and tournament management.
+
+## Contact
+
+- [GitHub](https://github.com/ABNaseer)
+- [LinkedIn](https://linkedin.com/in/abnaseer)
+- Email: abdullahnaseer02@outlook.com

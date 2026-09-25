@@ -18,7 +18,8 @@ js/script.js     Nav toggle, scroll-reveal, hash-free anchor scrolling,
                  data-disclosure-toggle expand/collapse, the one popup
 assets/          fonts/, img/ (favicon/, thumbs/, one folder per project),
                  og-image.png, the resume PDF
-robots.txt, sitemap.xml   Root on purpose (crawlers expect them there)
+robots.txt, sitemap.xml, llms.txt   Root on purpose (crawlers and AI
+                 agents expect them there)
 ```
 
 Untracked local files (never commit): `AGENTS.local.md`, `CLAUDE.md`,
@@ -32,6 +33,10 @@ Untracked local files (never commit): `AGENTS.local.md`, `CLAUDE.md`,
 - `<head>` carries canonical, `og:*`/`twitter:*` and a JSON-LD `Person`
   block. Keep title/description/URL in sync with the visible content, and
   regenerate `og-image.png` if the hero tagline changes.
+- `robots.txt` allows everyone and also names the main AI crawlers/agents
+  explicitly. `llms.txt` is a plain-text summary of the page for LLMs;
+  update it (and `lastmod` in `sitemap.xml`) when experience or projects
+  change.
 
 ## Images
 
